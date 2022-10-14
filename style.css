@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;600;800&display=swap');
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    font-family: 'Red Hat Display', sans-serif;
+}
+
+body {
+    background-color: #474D83;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+h1 {
+    color: antiquewhite;
+}
+
+h2 {
+    margin-bottom: 3rem;
+    color: antiquewhite;
+}
+
+.clock {
+    width: 400px;
+    height: 400px;
+    /* neumorphic shadow */
+    background: linear-gradient(145deg, #474D83, #555C9C);
+    box-shadow: 20px 20px 60px #43497c,
+             -20px -20px 60px #555C9C;
+
+    /* make the clock a circle */
+    border-radius: 50%;
+    border: 5px solid black;
+
+    /* position relative to allow us to position absolute the numbers and the hands */
+    position: relative;
+}
+
+.clock .number {
+    /* setting our rotation variable to 0 as initial/default state */
+    --rotation: 0;
+
+    /* position absolute to allow us to place numbers in the correct position */
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    text-align: center; /* this will place all the numbers at the 12 o'clock spot */
+    transform: rotate(var(--rotation));
+    color: antiquewhite;
+    font-size: 1.5rem;
+}
+
+.clock .number1 { --rotation: 30deg; }
+.clock .number2 { --rotation: 60deg; }
+.clock .number3 { --rotation: 90deg; }
+.clock .number4 { --rotation: 120deg; }
+.clock .number5 { --rotation: 150deg; }
+.clock .number6 { --rotation: 180deg; }
+.clock .number7 { --rotation: 210deg; }
+.clock .number8 { --rotation: 240deg; }
+.clock .number9 { --rotation: 270deg; }
+.clock .number10 { --rotation: 300deg; }
+.clock .number11 { --rotation: 330deg; }
+
+.clock .hand {
+    /* set rotation to initial/default state of 0 */
+    --rotation: 0;
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    background-color: black;
+
+    /* curves the tops of the hands */
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+
+    /* transforms the origin to state where to start the rotation from- default is the center of div */
+    transform-origin: bottom;
+
+    /* z-index brings hands to the top of the page, and go other the other elements */
+    z-index: 10;
+    
+    /* Translate X moves the hands back to the left of half its width, thus centering it */
+    /* Rotate calc is used to turn it into the correct degrees of rotation */
+    transform: translateX(-50%)rotate(calc(var(--rotation) * 1deg));
+}
+
+.clock::after {
+    content: '';
+    position: absolute;
+    background-color: #000;
+    z-index: 11;
+    height: 15px;
+    width: 15px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+}
+
+.clock .hand.hour {
+    width: 10px;
+    height: 35%;
+    background-color: black;
+}
+
+.clock .hand.minute {
+    width: 7px;
+    height: 40%;
+    background-color: black;
+}
+
+.clock .hand.second {
+    width: 2px;
+    height: 45%;
+    background-color: red;
+}
